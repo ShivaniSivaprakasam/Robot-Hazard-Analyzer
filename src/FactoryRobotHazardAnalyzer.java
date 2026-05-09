@@ -1,44 +1,44 @@
 /**
- * UC6: Exception Handling Integration
- * -----------------------------------
- * Goal:
- *   - Throw custom exception for invalid input
- *   - Handle using try-catch block
+ * UC7: Machinery State Risk Mapping
+ * ---------------------------------
+ * Goal: Convert machinery state into risk factor
+ * Valid States:
+ *   - Worn
+ *   - Faulty
+ *   - Critical
  */
 
 public class FactoryRobotHazardAnalyzer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RobotSafetyException {
 
-        try {
+        double risk = calculateHazardRisk(80, 30, "Faulty");
 
-            // UC6: Risk calculation call
-            double risk = calculateHazardRisk(120, 30);
-
-            System.out.println("Hazard Risk Score: " + risk);
-
-        } catch (RobotSafetyException e) {
-
-            // UC6: Exception handling output
-            System.out.println("Exception Occurred: " + e.getMessage());
-        }
+        System.out.println("Hazard Risk Score: " + risk);
     }
 
     /**
-     * UC6: Business logic with exception handling
+     * UC7: Risk calculation including machinery mapping
      */
-    public static double calculateHazardRisk(double armPrecision, int workerDensity)
+    public static double calculateHazardRisk(double armPrecision,
+                                             int workerDensity,
+                                             String machineryState)
             throws RobotSafetyException {
 
-        // UC6: Validation with exception throwing
-        if (armPrecision < 0 || armPrecision > 100) {
-            throw new RobotSafetyException("Invalid Arm Precision (0-100 allowed)");
+        double machineryRisk;
+
+        // UC7: Mapping machinery state to risk values
+        if (machineryState.equals("Worn")) {
+            machineryRisk = 20;
+        } else if (machineryState.equals("Faulty")) {
+            machineryRisk = 40;
+        } else if (machineryState.equals("Critical")) {
+            machineryRisk = 70;
+        } else {
+            throw new RobotSafetyException("Unsupported Machinery State");
         }
 
-        if (workerDensity < 0 || workerDensity > 100) {
-            throw new RobotSafetyException("Invalid Worker Density (0-100 allowed)");
-        }
-
-        return (100 - armPrecision) + workerDensity;
+        // Final UC7 risk formula
+        return (100 - armPrecision) + workerDensity + machineryRisk;
     }
 }
