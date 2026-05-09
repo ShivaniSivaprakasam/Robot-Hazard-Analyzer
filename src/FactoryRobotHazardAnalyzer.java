@@ -1,19 +1,32 @@
 /**
- * UC3: Calculate Hazard Risk Score (No Validation)
- * -------------------------------------------------
- * Goal: Compute hazard risk using basic formula
- * Formula:
- *   Risk = (100 - ArmPrecision) + WorkerDensity
+ * UC4: Add Input Validation Using Conditional Logic
+ * --------------------------------------------------
+ * Goal: Validate input ranges before calculation
+ * Rules:
+ *   - Arm Precision: 0–100
+ *   - Worker Density: 0–100
  */
 
 public class FactoryRobotHazardAnalyzer {
 
     public static void main(String[] args) {
 
-        double armPrecision = 70;
+        double armPrecision = 120; // invalid example
         int workerDensity = 30;
 
-        // UC3: Basic risk calculation (no validation yet)
+        // UC4: Validate Arm Precision
+        if (armPrecision < 0 || armPrecision > 100) {
+            System.out.println("Error: Invalid Arm Precision range");
+            return;
+        }
+
+        // UC4: Validate Worker Density
+        if (workerDensity < 0 || workerDensity > 100) {
+            System.out.println("Error: Invalid Worker Density range");
+            return;
+        }
+
+        // UC4: Risk calculation after validation
         double hazardRisk = (100 - armPrecision) + workerDensity;
 
         System.out.println("Hazard Risk Score: " + hazardRisk);
