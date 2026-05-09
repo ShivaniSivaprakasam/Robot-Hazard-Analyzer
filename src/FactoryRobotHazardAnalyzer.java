@@ -1,39 +1,21 @@
-import java.util.Scanner;
-
 /**
- * UC2: Accept Robot Hazard Inputs
- * --------------------------------
- * Goal: Read inputs from user for hazard analysis
- * Inputs:
- *   - Arm Precision (double)
- *   - Worker Density (int)
- *   - Machinery State (String)
+ * UC3: Calculate Hazard Risk Score (No Validation)
+ * -------------------------------------------------
+ * Goal: Compute hazard risk using basic formula
+ * Formula:
+ *   Risk = (100 - ArmPrecision) + WorkerDensity
  */
 
 public class FactoryRobotHazardAnalyzer {
 
     public static void main(String[] args) {
 
-        System.out.println("Factory Robot Hazard Analyzer");
+        double armPrecision = 70;
+        int workerDensity = 30;
 
-        Scanner scanner = new Scanner(System.in);
+        // UC3: Basic risk calculation (no validation yet)
+        double hazardRisk = (100 - armPrecision) + workerDensity;
 
-        // UC2: Collecting input from user
-        System.out.print("Enter Arm Precision (0-100): ");
-        double armPrecision = scanner.nextDouble();
-
-        System.out.print("Enter Worker Density (0-100): ");
-        int workerDensity = scanner.nextInt();
-
-        scanner.nextLine(); // consume newline
-
-        System.out.print("Enter Machinery State (Worn/Faulty/Critical): ");
-        String machineryState = scanner.nextLine();
-
-        // UC2: Displaying received inputs
-        System.out.println("\n--- Input Summary ---");
-        System.out.println("Arm Precision: " + armPrecision);
-        System.out.println("Worker Density: " + workerDensity);
-        System.out.println("Machinery State: " + machineryState);
+        System.out.println("Hazard Risk Score: " + hazardRisk);
     }
 }
