@@ -1,34 +1,32 @@
 /**
- * UC4: Add Input Validation Using Conditional Logic
- * --------------------------------------------------
- * Goal: Validate input ranges before calculation
- * Rules:
- *   - Arm Precision: 0–100
- *   - Worker Density: 0–100
+ * UC5: Method Abstraction for Risk Calculation
+ * --------------------------------------------
+ * Goal: Move logic into reusable method
+ * Benefits:
+ *   - Cleaner main method
+ *   - Reusability
  */
 
 public class FactoryRobotHazardAnalyzer {
 
     public static void main(String[] args) {
 
-        double armPrecision = 120; // invalid example
-        int workerDensity = 30;
+        // UC5: Calling reusable method
+        double risk = calculateHazardRisk(80, 30);
 
-        // UC4: Validate Arm Precision
-        if (armPrecision < 0 || armPrecision > 100) {
-            System.out.println("Error: Invalid Arm Precision range");
-            return;
-        }
+        System.out.println("Hazard Risk Score: " + risk);
+    }
 
-        // UC4: Validate Worker Density
-        if (workerDensity < 0 || workerDensity > 100) {
-            System.out.println("Error: Invalid Worker Density range");
-            return;
-        }
+    /**
+     * UC5: Business logic extracted into method
+     */
+    public static double calculateHazardRisk(double armPrecision, int workerDensity) {
 
-        // UC4: Risk calculation after validation
-        double hazardRisk = (100 - armPrecision) + workerDensity;
+        // Basic validation (still simple version)
+        if (armPrecision < 0 || armPrecision > 100) return -1;
+        if (workerDensity < 0 || workerDensity > 100) return -1;
 
-        System.out.println("Hazard Risk Score: " + hazardRisk);
+        // UC5: Risk calculation logic
+        return (100 - armPrecision) + workerDensity;
     }
 }
