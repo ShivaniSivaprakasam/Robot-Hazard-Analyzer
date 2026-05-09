@@ -1,44 +1,29 @@
 /**
- * UC7: Machinery State Risk Mapping
- * ---------------------------------
- * Goal: Convert machinery state into risk factor
- * Valid States:
- *   - Worn
- *   - Faulty
- *   - Critical
+ * UC8: Fully Modular Factory Robot Hazard Analyzer
+ * -------------------------------------------------
+ * Goal:
+ *   - Separate UI and business logic
+ *   - Follow OOP principles (SRP, Encapsulation)
  */
 
 public class FactoryRobotHazardAnalyzer {
 
-    public static void main(String[] args) throws RobotSafetyException {
+    public static void main(String[] args) {
 
-        double risk = calculateHazardRisk(80, 30, "Faulty");
+        // UC8: Creating service layer object
+        RobotHazardAuditor auditor = new RobotHazardAuditor();
 
-        System.out.println("Hazard Risk Score: " + risk);
-    }
+        try {
 
-    /**
-     * UC7: Risk calculation including machinery mapping
-     */
-    public static double calculateHazardRisk(double armPrecision,
-                                             int workerDensity,
-                                             String machineryState)
-            throws RobotSafetyException {
+            // UC8: Delegating calculation to service class
+            double risk = auditor.calculateHazardRisk(80, 30, "Faulty");
 
-        double machineryRisk;
+            System.out.println("Hazard Risk Score: " + risk);
 
-        // UC7: Mapping machinery state to risk values
-        if (machineryState.equals("Worn")) {
-            machineryRisk = 20;
-        } else if (machineryState.equals("Faulty")) {
-            machineryRisk = 40;
-        } else if (machineryState.equals("Critical")) {
-            machineryRisk = 70;
-        } else {
-            throw new RobotSafetyException("Unsupported Machinery State");
+        } catch (RobotSafetyException e) {
+
+            // UC8: Centralized exception handling
+            System.out.println("Error: " + e.getMessage());
         }
-
-        // Final UC7 risk formula
-        return (100 - armPrecision) + workerDensity + machineryRisk;
     }
 }
